@@ -167,7 +167,7 @@ def setup_ngrok_auth(authtoken):
         return False
 
 # ==================== ចាប់ផ្តើម Ngrok ====================
-def start_ngrok(port=5000):
+def start_ngrok(port=8080):
     """ចាប់ផ្តើម ngrok tunnel"""
     global ngrok_process
     
@@ -389,15 +389,15 @@ def create_link(mode):
     
     # 4. ចាប់ផ្តើម Flask
     flask_thread = threading.Thread(
-        target=lambda: app.run(host='0.0.0.0', port=5000, debug=False, use_reloader=False),
+        target=lambda: app.run(host='0.0.0.0', port=8080, debug=False, use_reloader=False),
         daemon=True
     )
     flask_thread.start()
-    print("\033[1;32m[✅] Flask ដំណើរការលើ port 5000\033[0m")
+    print("\033[1;32m[✅] Flask ដំណើរការលើ port 8080\033[0m")
     time.sleep(2)
     
     # 5. ចាប់ផ្តើម Ngrok
-    ngrok_url = start_ngrok(5000)
+    ngrok_url = start_ngrok(8080)
     if not ngrok_url:
         print("\033[1;31m[❌] Ngrok បរាជ័យ!\033[0m")
         return False
@@ -502,3 +502,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
